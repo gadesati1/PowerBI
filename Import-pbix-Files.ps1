@@ -43,9 +43,9 @@ foreach ($PowerBIReport in (Get-ChildItem -Path $PBIXSourceDir -Recurse | Where-
 {
     # update script with file path to PBIX file
     
-    Write-Host "Deploying $PowerBIReport to $WorkSpaceName"
+    Write-Host "Deploying $PowerBIReport to Workspace : $WorkSpaceName"
 
-    $import = New-PowerBIReport -Path $PowerBIReport -Workspace $WorkSpaceName -ConflictAction CreateOrOverwrite
+    $import = New-PowerBIReport -Path $PowerBIReport -Workspace $workspace -ConflictAction CreateOrOverwrite
 
     $import | select *
 }
