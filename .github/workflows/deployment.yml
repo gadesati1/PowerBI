@@ -1,4 +1,4 @@
-name: Notebook-Deployment-Databricks
+name: PBIX-Deployment
 on:
   workflow_call:
    inputs:
