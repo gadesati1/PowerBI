@@ -39,14 +39,13 @@ else {
   $workspace = New-PowerBIGroup -Name $WorkSpaceName
 }
 
-foreach ($PowerBIReport in Get-ChildItem -Path $PBIXSourceDir -Recurse | Where-Object $_.Extension -eq ".pbix")
+foreach ($PowerBIReport in (Get-ChildItem -Path $PBIXSourceDir -Recurse | Where-Object {$_.Extension -eq ".pbix"}).FullName)
 {
     # update script with file path to PBIX file
-    $pbixFilePath = $PowerBIReport.FullName
+    
+    Write-Host "Deploying $PowerBIReport to $WorkSpaceName"
 
-    Write-Host "Deploying $($PowerBIReport.FullName) to $WorkSpaceName"
-
-    $import = New-PowerBIReport -Path $pbixFilePath -Workspace $WorkSpaceName -ConflictAction CreateOrOverwrite
+    $import = New-PowerBIReport -Path $PowerBIReport -Workspace $WorkSpaceName -ConflictAction CreateOrOverwrite
 
     $import | select *
 }
