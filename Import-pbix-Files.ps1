@@ -35,8 +35,8 @@ if($workspace) {
   Write-Host "The workspace named $WorkSpaceName already exists"
 }
 else {
-  Write-Host "Creating new workspace named $WorkSpaceName"
-  $workspace = New-PowerBIGroup -Name $WorkSpaceName
+  Write-Host "Workspace named $WorkSpaceName not exists, please create and add SP as contributor."
+  #$workspace = New-PowerBIGroup -Name $WorkSpaceName
 }
 
 foreach ($PowerBIReport in (Get-ChildItem -Path $PBIXSourceDir -Recurse | Where-Object {$_.Extension -eq ".pbix"}).FullName)
