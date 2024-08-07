@@ -20,4 +20,4 @@ jobs:
 
       - name: Deploy PBIX Files
         shell: pwsh
-        run: ${{ github.workspace }}/Import-pbix-Files.ps1 -TenantId "${{ secrets.TENANTID }}" -ApplicationId "${{ secrets.APPID }}" -secPwd "${{ secrets.CLIENT_SECRET }}" -PBIXSourceDir "${{ github.workspace }}" -WorkSpaceName "${{ inputs.target_Environment }}-Space"
+        run: ${{ github.workspace }}/Import-pbix-Files.ps1 -TenantId "${{ secrets.TENANTID }}" -ApplicationId "${{ secrets.APPID }}" -secPwd "${{ secrets.CLIENT_SECRET }}" -PBIXSourceDir "${{ github.workspace }}" -WorkSpaceName "${{ inputs.target_Environment }}Space"
