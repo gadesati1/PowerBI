@@ -16,6 +16,14 @@ param(
     [string]$WorkSpaceName
 )
 
+<# Check if MicrosoftPowerBIMgmt module is installed #>
+if (-not(Get-InstalledModule -name MicrosoftPowerBIMgmt -ErrorAction silentlycontinue)) {
+	Write-Host "Module MicrosoftPowerBIMgmt does not exist - Installing module";
+	Install-Module MicrosoftPowerBIMgmt -Force -Scope CurrentUser;
+}
+else {
+	Write-Host "Module MicrosoftPowerBIMgmt exists";
+}
 
 $securePassword = $secPwd | ConvertTo-SecureString -AsPlainText -Force
 $credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $ApplicationId, $securePassword
