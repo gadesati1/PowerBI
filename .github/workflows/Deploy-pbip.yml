@@ -1,0 +1,23 @@
+name: PBIP-Deployment
+on:
+  workflow_call:
+   inputs:
+      target_Environment:
+        description: Environment to Deploy
+        type: string
+        required: true
+
+jobs:
+  push_to_db:
+    name: Deploying to ${{ inputs.target_Environment }}
+    runs-on: ubuntu-latest
+    environment:
+     name: ${{ inputs.target_Environment }}
+      
+    steps:
+      - name: Checkout current repository
+        uses: actions/checkout@v4
+
+      - name: Deploy PBIX Files
+        shell: pwsh
+        run: ${{ github.workspace }}/Deploy-PBIP.ps1 -TenantId "${{ secrets.TENANTID }}" -ApplicationId "${{ secrets.APPID }}" -secPwd "${{ secrets.CLIENT_SECRET }}" -PBIXSourceDir "${{ github.workspace }}" -WorkSpaceName "${{ inputs.target_Environment }}Space"
