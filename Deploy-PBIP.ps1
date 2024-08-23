@@ -51,7 +51,7 @@ $tenantId = $TenantId
 Import-Module "$workingFolder\modules\FabricPS-PBIP" -Force
 
 
-Write-Host "##[debug]Authentication with SPN"
+Write-Host "Authentication with SPN"
 
 Set-FabricAuthToken -servicePrincipalId $appId -servicePrincipalSecret $appSecret -tenantId $tenantId -reset                        
 
@@ -75,6 +75,6 @@ $reports = Get-ChildItem -Directory -Path $path
 
 foreach($report in $reports)
 {
-    Write-Host "##[debug]Publishing Report from $path\$report"
-    $import = Import-FabricItems -workspaceId $workspaceId -path "$path\$report"
+    Write-Host "Publishing Report from $report"
+    $import = Import-FabricItems -workspaceId $workspaceId -path $report
 }
